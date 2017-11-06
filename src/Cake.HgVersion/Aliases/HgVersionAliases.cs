@@ -1,0 +1,60 @@
+﻿using System;
+using Cake.Core;
+using Cake.Core.Annotations;
+using Cake.Core.IO;
+using Cake.HgVersion.Core;
+using Mercurial;
+
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
+
+namespace Cake.HgVersion.Aliases
+{
+    /// <summary>
+    /// Contains functionality for SemVer versioning using Mercurial history.
+    /// <code>
+    ///     #addin Cake.HgVersion
+    /// </code>
+    /// </summary>
+    [CakeAliasCategory("HgVersion")]
+    public static class HgVersionAliases
+    {
+        /// <summary>
+        /// Get the mercurial version info for the project. 
+        /// </summary>
+        /// <param name="context">Cake context</param>
+        /// <param name="repositoryPath">Path to repository</param>
+        /// <returns></returns>
+        [CakeMethodAlias]
+        [CakeAliasCategory("Version")]
+        public static HgVersionInfo HgVersion(this ICakeContext context, DirectoryPath repositoryPath)
+        {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
+
+            return GetHgRepository(context, repositoryPath).GetVersionInfo();
+        }
+
+        /// <summary>
+        /// Get the mercurial version info for the project. 
+        /// </summary>
+        /// <param name="context">Cake context</param>
+        /// <param name="repositoryPath">Path to repository</param>
+        /// <param name="settings">Hg version settings</param>
+        [CakeMethodAlias]
+        [CakeAliasCategory("Version")]
+        public static HgVersionInfo HgVersion(this ICakeContext context, DirectoryPath repositoryPath, HgVersionSettings settings)
+        {
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
+
+            return GetHgRepository(context, repositoryPath).GetVersionInfo(settings);
+        }
+
+        private static Repository GetHgRepository(ICakeContext context, DirectoryPath repositoryPath)
+        {
+            var path = repositoryPath.MakeAbsolute(context.Environment);
+            return new Repository(path.FullPath);
+        }
+    }
+}
