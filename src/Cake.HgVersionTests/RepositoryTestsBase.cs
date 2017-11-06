@@ -47,7 +47,7 @@ namespace Cake.HgVersionTests
         protected string GetResource(string name)
         {
             var assembly = Assembly.GetExecutingAssembly();
-            using (var stream = assembly.GetManifestResourceStream($"Cake.HgTests.Resources.{name}"))
+            using (var stream = assembly.GetManifestResourceStream($"Cake.HgVersionTests.Resources.{name}"))
             using (var reader = new StreamReader(stream))
             {
                 return reader.ReadToEnd();

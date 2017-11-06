@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<package >
+    <metadata>
+        <id>Cake.HgVersion</id>
+        <version>$version$</version>
+        <title>Cake.HgVersion</title>
+        <authors>vCipher</authors>
+        <owners>vCipher,cake-contrib</owners>
+        <description>Cake AddIn that extends Cake with SemVer versioning using Mercurial history</description>
+        <copyright>Copyright © vCipher 2017</copyright>
+        <iconUrl>https://raw.githubusercontent.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
+        <projectUrl>https://github.com/vCipher/Cake.HgVersion</projectUrl>
+        <tags>cake hg mercurial semver</tags>
+    </metadata>
+    <files>
+        <file src="Cake.HgVersion.dll" target="lib\net461" />
+        <file src="Cake.HgVersion.xml" target="lib\net461" />
+        <file src="Mercurial.Net.dll" target="lib\net461" />
+        <file src="Mercurial.Net.xml" target="lib\net461" />
+    </files>
+</package>

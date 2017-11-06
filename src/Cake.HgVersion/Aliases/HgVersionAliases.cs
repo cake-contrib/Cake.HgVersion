@@ -10,6 +10,13 @@ using Mercurial;
 
 namespace Cake.HgVersion.Aliases
 {
+    /// <summary>
+    /// Contains functionality for SemVer versioning using Mercurial history.
+    /// <code>
+    ///     #addin Cake.HgVersion
+    /// </code>
+    /// </summary>
+    [CakeAliasCategory("HgVersion")]
     public static class HgVersionAliases
     {
         /// <summary>
@@ -25,8 +32,7 @@ namespace Cake.HgVersion.Aliases
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
 
-            var path = repositoryPath.MakeAbsolute(context.Environment);
-            return new Repository(path.FullPath).GetVersionInfo();
+            return GetHgRepository(context, repositoryPath).GetVersionInfo();
         }
 
         /// <summary>
@@ -42,8 +48,13 @@ namespace Cake.HgVersion.Aliases
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
 
+            return GetHgRepository(context, repositoryPath).GetVersionInfo(settings);
+        }
+
+        private static Repository GetHgRepository(ICakeContext context, DirectoryPath repositoryPath)
+        {
             var path = repositoryPath.MakeAbsolute(context.Environment);
-            return new Repository(path.FullPath).GetVersionInfo(settings);
+            return new Repository(path.FullPath);
         }
     }
 }

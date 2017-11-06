@@ -55,6 +55,10 @@
       <Name>Cake.HgVersion</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\AssemblyInfo_Expected.txt" />
+    <EmbeddedResource Include="Resources\AssemblyInfo_Template.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Cake AddIn that extends Cake with SemVer versioning using Mercurial history")]
 [assembly: AssemblyCompany("vCipher")]
 [assembly: AssemblyProduct("Cake.HgVersion")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
+[assembly: AssemblyCopyright("Copyright © vCipher 2017")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
