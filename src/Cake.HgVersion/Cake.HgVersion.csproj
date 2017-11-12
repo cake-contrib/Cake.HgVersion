@@ -48,7 +48,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Aliases\HgVersionAliases.cs" />
+    <Compile Include="Core\BuildMetadata.cs" />
     <Compile Include="Core\HgExtensions.cs" />
+    <Compile Include="Core\PreReleaseTag.cs" />
+    <Compile Include="Core\SemanticVersion.cs" />
+    <Compile Include="Core\SemanticVersionException.cs" />
+    <Compile Include="Core\VersionField.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\HgIncrementVersionSettings.cs" />
     <Compile Include="Core\HgUpdateAssemblyInfoSettings.cs" />
