@@ -1,7 +1,7 @@
-﻿using Cake.HgVersion.Core;
+﻿using HgVersion.SemanticVersions;
 using NUnit.Framework;
 
-namespace Cake.HgVersionTests.Core
+namespace HgVersionTests.SemanticVersions
 {
     [TestFixture, Parallelizable(ParallelScope.All)]
     public class SemanticVersionTests
@@ -59,19 +59,19 @@ namespace Cake.HgVersionTests.Core
             var left = SemanticVersion.Parse(leftInput, null);
             var right = SemanticVersion.Parse(rightInput, null);
             
-            Assert.That(left < right, Is.True);
+            Assert.That(left, Is.LessThan(right));
         }
         
         [Test]
         [TestCase("1.1.0", "1.0.0")]
         [TestCase("1.0.1", "1.0.0")]
-        [TestCase("1.0.0", "1.0.0-beta.1+4.Sha.12234.Othershiz")]
+        [TestCase("1.0.0-beta.1+4.Sha.12234.Othershiz", "1.0.0")]
         public void CompareTest_Greater(string leftInput, string rightInput)
         {
             var left = SemanticVersion.Parse(leftInput, null);
             var right = SemanticVersion.Parse(rightInput, null);
             
-            Assert.That(left > right, Is.True);
+            Assert.That(left, Is.GreaterThan(right));
         }
         
         [Test]
@@ -81,7 +81,7 @@ namespace Cake.HgVersionTests.Core
             var left = SemanticVersion.Parse(leftInput, null);
             var right = SemanticVersion.Parse(rightInput, null);
             
-            Assert.That(left == right, Is.True);
+            Assert.That(left, Is.EqualTo(right));
         }
     }
 }
