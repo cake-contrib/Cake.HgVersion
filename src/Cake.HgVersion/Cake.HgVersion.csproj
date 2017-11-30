@@ -47,16 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="HgVersionContext.cs" />
-    <Compile Include="VCS\HgBranchHead.cs" />
-    <Compile Include="VCS\HgCommit.cs" />
-    <Compile Include="VCS\HgLogQuery.cs" />
-    <Compile Include="VCS\HgLogQueryBuilder.cs" />
-    <Compile Include="VCS\HgNamedCommit.cs" />
-    <Compile Include="VCS\HgRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Namespaces.cs" />
-    <Compile Include="VCS\HgTag.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="$(SolutionDir)\SolutionInfo.cs" Condition="Exists('$(SolutionDir)\SolutionInfo.cs')">
@@ -67,9 +59,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HgVersion\HgVersion.csproj">
-      <Project>{cf97ca74-7f82-43e6-b9cc-9de58d7e6624}</Project>
-      <Name>HgVersion</Name>
+    <ProjectReference Include="..\VCSVersion\VCSVersion.csproj">
+      <Project>{297919b8-481c-44a8-96f0-5ec7f2644a38}</Project>
+      <Name>VCSVersion</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
