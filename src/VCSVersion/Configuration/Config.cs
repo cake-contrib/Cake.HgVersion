@@ -63,10 +63,7 @@ namespace VCSVersion.Configuration
 
         [YamlMember(Alias = "no-bump-message")]
         public string NoBumpMessage { get; set; }
-
-        [YamlMember(Alias = "legacy-semver-padding")]
-        public int? LegacySemVerPadding { get; set; }
-
+        
         [YamlMember(Alias = "build-metadata-padding")]
         public int? BuildMetaDataPadding { get; set; }
 

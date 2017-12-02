@@ -52,16 +52,24 @@
     <Reference Include="Ploeh.AutoFixture.AutoMoq, Version=3.51.0.0, Culture=neutral, PublicKeyToken=b24654c590009d4f, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoFixture.AutoMoq.3.51.0\lib\net40\Ploeh.AutoFixture.AutoMoq.dll</HintPath>
     </Reference>
+    <Reference Include="Shouldly, Version=2.8.3.0, Culture=neutral, PublicKeyToken=6042cbcb05cbc941, processorArchitecture=MSIL">
+      <HintPath>..\packages\Shouldly.2.8.3\lib\net451\Shouldly.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\TestEffectiveConfiguration.cs" />
+    <Compile Include="Helpers\TestFileSystem.cs" />
+    <Compile Include="Helpers\TestStream.cs" />
     <Compile Include="ModuleInitializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestVesionContext.cs" />
     <Compile Include="VCS\HgLogQueryBuilderTests.cs" />
     <Compile Include="VCS\HgLogQueryTests.cs" />
-    <Compile Include="VersionEngineTests.cs" />
+    <Compile Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.cs" />
+    <Compile Include="VersionFinderTests.cs" />
+    <Compile Include="VersionInformationResources\VersionInformationGeneratorTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -79,6 +87,29 @@
       <Project>{297919b8-481c-44a8-96f0-5ec7f2644a38}</Project>
       <Name>VCSVersion</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile.cs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile.fs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile.vb.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFileAtPathWhenNotExistsAndEnsureAssemblyInfo.cs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFileAtPathWhenNotExistsAndEnsureAssemblyInfo.fs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFileAtPathWhenNotExistsAndEnsureAssemblyInfo.vb.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFilesAtPathWhenNotExistsAndEnsureAssemblyInfo.cs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFilesAtPathWhenNotExistsAndEnsureAssemblyInfo.fs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFilesAtPathWhenNotExistsAndEnsureAssemblyInfo.vb.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFileWhenNotExistsAndEnsureAssemblyInfo.cs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFileWhenNotExistsAndEnsureAssemblyInfo.fs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldCreateAssemblyInfoFileWhenNotExistsAndEnsureAssemblyInfo.vb.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldNotAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFileWhenVersionSchemeIsNone.cs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldNotAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFileWhenVersionSchemeIsNone.fs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldNotAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFileWhenVersionSchemeIsNone.vb.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldNotReplaceAssemblyVersionWhenVersionSchemeIsNone.cs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldNotReplaceAssemblyVersionWhenVersionSchemeIsNone.fs.approved.txt" />
+    <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldNotReplaceAssemblyVersionWhenVersionSchemeIsNone.vb.approved.txt" />
+    <Content Include="VersionInformationResources\VersionInformationGeneratorTests.ShouldCreateFile.vb.approved.txt" />
+    <Content Include="VersionInformationResources\VersionInformationGeneratorTests.ShouldCreateFile.cs.approved.txt" />
+    <Content Include="VersionInformationResources\VersionInformationGeneratorTests.ShouldCreateFile.fs.approved.txt" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

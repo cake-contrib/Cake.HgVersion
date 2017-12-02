@@ -1,5 +1,6 @@
 ﻿using VCSVersion.Configuration;
 using VCSVersion.Helpers;
+using VCSVersion.SemanticVersions;
 using VCSVersion.VCS;
 
 namespace VCSVersion
@@ -43,5 +44,15 @@ namespace VCSVersion
         /// Provides additional information about repository.
         /// </summary>
         IRepositoryMetadataProvider RepositoryMetadataProvider { get; }
+
+        /// <summary>
+        /// Checks if the current is tagged.
+        /// </summary>
+        bool IsCurrentCommitTagged { get; }
+
+        /// <summary>
+        /// Current commit tagged version.
+        /// </summary>
+        SemanticVersion CurrentCommitTaggedVersion { get; }
     }
 }

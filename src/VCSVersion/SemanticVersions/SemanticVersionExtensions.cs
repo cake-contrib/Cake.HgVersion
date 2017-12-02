@@ -1,4 +1,5 @@
-﻿using VCSVersion.Output;
+﻿using VCSVersion.Configuration;
+using VCSVersion.Output;
 
 namespace VCSVersion.SemanticVersions
 {
@@ -11,10 +12,11 @@ namespace VCSVersion.SemanticVersions
         /// Converts a <see cref="SemanticVersion"/> into <see cref="VersionVariables"/>
         /// </summary>
         /// <param name="semVersion">Semantic version</param>
+        /// <param name="config">Effective configuration</param>
         /// <returns></returns>
-        public static VersionVariables ToVersionVariables(this SemanticVersion semVersion)
+        public static VersionVariables ToVersionVariables(this SemanticVersion semVersion, EffectiveConfiguration config)
         {
-            var builder = new VersionVariablesBuilder(semVersion);
+            var builder = new VersionVariablesBuilder(semVersion, config);
             return builder.Build();
         }
     }

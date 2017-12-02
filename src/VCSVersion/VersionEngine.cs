@@ -1,4 +1,5 @@
-﻿using VCSVersion.SemanticVersions;
+﻿using VCSVersion.Output;
+using VCSVersion.SemanticVersions;
 using VCSVersion.VersionCalculation;
 using VCSVersion.VersionCalculation.BaseVersionCalculation;
 
@@ -13,13 +14,16 @@ namespace VCSVersion
             _context = context;
         }
 
-        public SemanticVersion Execute()
+        public VersionVariables Execute()
         {
-            var baseCalculator = new BaseVersionCalculator(
-                new FallbackBaseVersionStrategy());
-            
-            var versionCalculator = new NextVersionCalculator(baseCalculator);
-            return versionCalculator.CalculateVersion(_context);
+            //var applicableBuildServers = BuildServerList.GetApplicableBuildServers();
+            //var buildServer = applicableBuildServers.FirstOrDefault();
+
+            var versionFinder = new VersionFinder();
+            var semVersion = versionFinder.FindVersion(_context);
+
+            var variablesBuilder = new VersionVariablesBuilder(semVersion, _context.Configuration);
+            return variablesBuilder.Build();
         }
     }
 }

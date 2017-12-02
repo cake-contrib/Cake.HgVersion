@@ -7,7 +7,8 @@ using VCSVersion.VersionFilters;
 namespace VCSVersion.Configuration
 {
     /// <summary>
-    /// Configuration can be applied to different things, effective configuration is the result after applying the appropriate configuration
+    /// Configuration can be applied to different things, effective configuration 
+    /// is the result after applying the appropriate configuration
     /// </summary>
     public class EffectiveConfiguration
     {
@@ -15,7 +16,7 @@ namespace VCSVersion.Configuration
             AssemblyVersioningScheme assemblyVersioningScheme,
             AssemblyFileVersioningScheme assemblyFileVersioningScheme,
             string assemblyInformationalFormat,
-            VersioningMode versioningMode, string gitTagPrefix,
+            VersioningMode versioningMode, string tagPrefix,
             string tag, string nextVersion, IncrementStrategyType increment,
             string branchPrefixToTrim,
             bool preventIncrementForMergedBranchVersion,
@@ -27,7 +28,6 @@ namespace VCSVersion.Configuration
             string patchVersionBumpMessage,
             string noBumpMessage,
             CommitMessageIncrementMode commitMessageIncrementing,
-            int legacySemVerPaddding,
             int buildMetaDataPadding,
             int commitsSinceVersionSourcePadding,
             IEnumerable<IVersionFilter> versionFilters,
@@ -39,7 +39,7 @@ namespace VCSVersion.Configuration
             AssemblyFileVersioningScheme = assemblyFileVersioningScheme;
             AssemblyInformationalFormat = assemblyInformationalFormat;
             VersioningMode = versioningMode;
-            GitTagPrefix = gitTagPrefix;
+            TagPrefix = tagPrefix;
             Tag = tag;
             NextVersion = nextVersion;
             Increment = increment;
@@ -53,7 +53,6 @@ namespace VCSVersion.Configuration
             PatchVersionBumpMessage = patchVersionBumpMessage;
             NoBumpMessage = noBumpMessage;
             CommitMessageIncrementing = commitMessageIncrementing;
-            LegacySemVerPadding = legacySemVerPaddding;
             BuildMetaDataPadding = buildMetaDataPadding;
             CommitsSinceVersionSourcePadding = commitsSinceVersionSourcePadding;
             VersionFilters = versionFilters;
@@ -62,55 +61,54 @@ namespace VCSVersion.Configuration
             CommitDateFormat = commitDateFormat;
         }
 
-        public bool TracksReleaseBranches { get; private set; }
-        public bool IsCurrentBranchRelease { get; private set; }
+        public bool TracksReleaseBranches { get; }
+        public bool IsCurrentBranchRelease { get; }
 
-        public VersioningMode VersioningMode { get; private set; }
+        public VersioningMode VersioningMode { get; }
 
-        public AssemblyVersioningScheme AssemblyVersioningScheme { get; private set; }
-        public AssemblyFileVersioningScheme AssemblyFileVersioningScheme { get; private set; }
-        public string AssemblyInformationalFormat { get; private set; }
+        public AssemblyVersioningScheme AssemblyVersioningScheme { get; }
+        public AssemblyFileVersioningScheme AssemblyFileVersioningScheme { get; }
+        public string AssemblyInformationalFormat { get; }
 
         /// <summary>
-        /// Git tag prefix
+        /// Tag prefix
         /// </summary>
-        public string GitTagPrefix { get; private set; }
+        public string TagPrefix { get; }
 
         /// <summary>
         /// Tag to use when calculating SemVer
         /// </summary>
-        public string Tag { get; private set; }
+        public string Tag { get; }
 
-        public string NextVersion { get; private set; }
+        public string NextVersion { get; }
 
-        public IncrementStrategyType Increment { get; private set; }
+        public IncrementStrategyType Increment { get; }
 
-        public string BranchPrefixToTrim { get; private set; }
+        public string BranchPrefixToTrim { get; }
 
-        public bool PreventIncrementForMergedBranchVersion { get; private set; }
+        public bool PreventIncrementForMergedBranchVersion { get; }
 
-        public string TagNumberPattern { get; private set; }
+        public string TagNumberPattern { get; }
 
-        public string ContinuousDeploymentFallbackTag { get; private set; }
+        public string ContinuousDeploymentFallbackTag { get; }
 
-        public bool TrackMergeTarget { get; private set; }
+        public bool TrackMergeTarget { get; }
 
-        public string MajorVersionBumpMessage { get; private set; }
+        public string MajorVersionBumpMessage { get; }
 
-        public string MinorVersionBumpMessage { get; private set; }
+        public string MinorVersionBumpMessage { get; }
 
-        public string PatchVersionBumpMessage { get; private set; }
+        public string PatchVersionBumpMessage { get; }
 
-        public string NoBumpMessage { get; private set; }
-        public int LegacySemVerPadding { get; private set; }
-        public int BuildMetaDataPadding { get; private set; }
+        public string NoBumpMessage { get; }
+        public int BuildMetaDataPadding { get; }
 
-        public int CommitsSinceVersionSourcePadding { get; private set; }
+        public int CommitsSinceVersionSourcePadding { get; }
 
-        public CommitMessageIncrementMode CommitMessageIncrementing { get; private set; }
+        public CommitMessageIncrementMode CommitMessageIncrementing { get; }
 
-        public IEnumerable<IVersionFilter> VersionFilters { get; private set; }
+        public IEnumerable<IVersionFilter> VersionFilters { get; }
 
-        public string CommitDateFormat { get; private set; }
+        public string CommitDateFormat { get; }
     }
 }

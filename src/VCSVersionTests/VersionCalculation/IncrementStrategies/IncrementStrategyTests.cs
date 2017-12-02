@@ -2,7 +2,7 @@
 using VCSVersion.SemanticVersions;
 using VCSVersion.VersionCalculation;
 
-namespace VCSVersionTests.VersionCalculation
+namespace VCSVersionTests.VersionCalculation.IncrementStrategies
 {
     [TestFixture]
     public class IncrementStrategyTests
