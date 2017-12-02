@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace VCSVersion.Exceptions
+namespace VCSVersion.Configuration
 {
     [Serializable]
     public class ConfigurationException : Exception

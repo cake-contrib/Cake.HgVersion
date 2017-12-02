@@ -19,7 +19,7 @@ namespace HgVersionTests.Configuration
             AssemblyFileVersioningScheme assemblyFileVersioningScheme = AssemblyFileVersioningScheme.MajorMinorPatch,
             string assemblyInformationalFormat = null,
             VersioningMode versioningMode = VersioningMode.ContinuousDelivery,
-            string gitTagPrefix = "v",
+            string tagPrefix = "v",
             string tag = "",
             string nextVersion = null,
             string branchPrefixToTrim = "",
@@ -38,7 +38,7 @@ namespace HgVersionTests.Configuration
             bool tracksReleaseBranches = false,
             bool isRelease = false,
             string commitDateFormat = "yyyy-MM-dd") :
-            base(assemblyVersioningScheme, assemblyFileVersioningScheme, assemblyInformationalFormat, versioningMode, gitTagPrefix, tag, nextVersion, IncrementStrategyType.Patch,
+            base(assemblyVersioningScheme, assemblyFileVersioningScheme, assemblyInformationalFormat, versioningMode, tagPrefix, tag, nextVersion, IncrementStrategyType.Patch,
                     branchPrefixToTrim, preventIncrementForMergedBranchVersion, tagNumberPattern, continuousDeploymentFallbackTag,
                     trackMergeTarget,
                     majorMessage, minorMessage, patchMessage, noBumpMessage,

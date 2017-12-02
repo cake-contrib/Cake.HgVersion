@@ -57,8 +57,12 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="YamlDotNet, Version=4.2.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\YamlDotNet.4.2.2\lib\net35\YamlDotNet.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\HgConfigurationProviderTests.cs" />
     <Compile Include="Configuration\TestEffectiveConfiguration.cs" />
     <Compile Include="Helpers\TestFileSystem.cs" />
     <Compile Include="Helpers\TestStream.cs" />
@@ -89,6 +93,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Configuration\HgConfigurationProviderTests.CanWriteOutEffectiveConfiguration.approved.txt" />
     <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile.cs.approved.txt" />
     <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile.fs.approved.txt" />
     <Content Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.ShouldAddAssemblyInformationalVersionWhenUpdatingAssemblyVersionFile.vb.approved.txt" />
