@@ -1,60 +1,61 @@
-﻿//using System;
-//using System.Collections.Generic;
-//using System.Text;
+﻿using System.Collections.Generic;
+using System.Linq;
+using VCSVersion.Configuration;
+using VCSVersion.SemanticVersions;
+using VCSVersion.VCS;
 
-//namespace HgVersion.VersionCalculation.BaseVersionCalculation
-//{
-//    /// <summary>
-//    /// Version is extracted from older commits's merge messages.
-//    /// Source is the commit where the message was found.
-//    /// Increments if PreventIncrementForMergedBranchVersion (from the branch config) is false.
-//    /// </summary>
-//    public class MergeMessageBaseVersionStrategy : IBaseVersionStrategy
-//    {
-//        public override IEnumerable<BaseVersion> GetVersions(IVersionContext context)
-//        {
-//            var repository = context.Repository;
-//            var branch = repository.Branch();
-//            var tip = repository.Tip();
+namespace VCSVersion.VersionCalculation.BaseVersionCalculation
+{
+    /// <summary>
+    /// Version is extracted from older commits's merge messages.
+    /// <see cref="BaseVersion.Source"/> is the commit where the message was found.
+    /// Increments if <see cref="BranchConfig.PreventIncrementForMergedBranchVersion"/> is false.
+    /// </summary>
+    public sealed class MergeMessageBaseVersionStrategy : IBaseVersionStrategy
+    {
+        public IEnumerable<BaseVersion> GetVersions(IVersionContext context)
+        {
+            var commitsPriorToThan = context.CurrentBranch
+                .CommitsPriorToThan(context, context.CurrentCommit.When);
 
-//            var commitsPriorToThan = repository
-//                .Log(select =>
-//                    select.AncestorsOf())
+            var baseVersions = commitsPriorToThan
+                .SelectMany(c =>
+                {
+                    if (TryParse(c, context, out var semanticVersion))
+                    {
+                        var shouldIncrement = !context.Configuration.PreventIncrementForMergedBranchVersion;
+                        var baseVersion = new BaseVersion(FormatType(c), semanticVersion, c, shouldIncrement);
 
-//            var commitsPriorToThan = context.CurrentBranch
-//                .CommitsPriorToThan(context.CurrentCommit.When());
-//            var baseVersions = commitsPriorToThan
-//                .SelectMany(c =>
-//                {
-//                    SemanticVersion semanticVersion;
-//                    if (TryParse(c, context, out semanticVersion))
-//                    {
-//                        var shouldIncrement = !context.Configuration.PreventIncrementForMergedBranchVersion;
-//                        return new[]
-//                        {
-//                            new BaseVersion(context, string.Format("Merge message '{0}'", c.Message.Trim()), shouldIncrement, semanticVersion, c, null)
-//                        };
-//                    }
-//                    return Enumerable.Empty<BaseVersion>();
-//                }).ToList();
-//            return baseVersions;
-//        }
+                        return new[] { baseVersion };
+                    }
 
-//        static bool TryParse(Commit mergeCommit, GitVersionContext context, out SemanticVersion semanticVersion)
-//        {
-//            semanticVersion = Inner(mergeCommit, context);
-//            return semanticVersion != null;
-//        }
+                    return Enumerable.Empty<BaseVersion>();
+                }).ToList();
 
-//        static SemanticVersion Inner(Commit mergeCommit, GitVersionContext context)
-//        {
-//            if (mergeCommit.Parents.Count() < 2)
-//            {
-//                return null;
-//            }
+            return baseVersions;
+        }
 
-//            var mergeMessage = new MergeMessage(mergeCommit.Message, context.FullConfiguration);
-//            return mergeMessage.Version;
-//        }
-//    }
-//}
+        private static string FormatType(ICommit commit)
+        {
+            return $"Merge message '{commit.CommitMessage?.Trim()}'";
+        }
+
+        private static bool TryParse(ICommit mergeCommit, IVersionContext context, out SemanticVersion semanticVersion)
+        {
+            semanticVersion = Inner(mergeCommit, context);
+            return semanticVersion != null;
+        }
+
+        private static SemanticVersion Inner(ICommit mergeCommit, IVersionContext context)
+        {
+            if (mergeCommit.Parents(context).Count() < 2)
+                return null;
+
+            var mergeMessage = context
+                .RepositoryMetadataProvider
+                .ParseMergeMessage(mergeCommit.CommitMessage);
+
+            return mergeMessage.Version;
+        }
+    }
+}

@@ -70,6 +70,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Helpers\TestFileSystem.cs" />
     <Compile Include="VersionCalculation\BaseVersionCalculation\FallbackBaseVersionStrategyTests.cs" />
+    <Compile Include="VersionCalculation\BaseVersionCalculation\MergeMessageBaseVersionStrategyTests.cs" />
     <Compile Include="VersionCalculation\IncrementStrategies\IncrementStrategyTests.cs" />
     <Compile Include="VersionCalculation\NextVersionCalculatorTests.cs" />
     <Compile Include="VersionCalculation\VersionFilters\HashVersionFilterTests.cs" />

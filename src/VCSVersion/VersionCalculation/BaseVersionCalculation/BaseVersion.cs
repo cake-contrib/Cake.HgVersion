@@ -27,16 +27,22 @@ namespace VCSVersion.VersionCalculation.BaseVersionCalculation
         /// Should increment current version
         /// </summary>
         public bool ShouldIncrement { get; }
-        
+
+        /// <summary>
+        /// todo: find out what is it.
+        /// </summary>
+        public string BranchNameOverride { get; set; }
+
         /// <summary>
         /// Create an instance of <see cref="BaseVersion"/>
         /// </summary>
-        public BaseVersion(string type, SemanticVersion version, ICommit source, bool shouldIncrement)
+        public BaseVersion(string type, SemanticVersion version, ICommit source, bool shouldIncrement = false, string branchNameOverride = null)
         {
             Type = type;
             Version = version;
             Source = source;
             ShouldIncrement = shouldIncrement;
+            BranchNameOverride = branchNameOverride;
         }
 
         /// <inheritdoc />

@@ -71,6 +71,7 @@
     <Compile Include="TestVesionContext.cs" />
     <Compile Include="VCS\HgLogQueryBuilderTests.cs" />
     <Compile Include="VCS\HgLogQueryTests.cs" />
+    <Compile Include="VCS\HgMergeMessageTests.cs" />
     <Compile Include="VersionAssemblyInfoResources\AssemblyInfoFileUpdaterTests.cs" />
     <Compile Include="VersionFinderTests.cs" />
     <Compile Include="VersionInformationResources\VersionInformationGeneratorTests.cs" />

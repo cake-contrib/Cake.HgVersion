@@ -21,7 +21,19 @@ namespace VCSVersion.VCS
         /// </summary>
         ICommit FindMergeBase(IBranchHead branch, IBranchHead otherBranch);
 
+        /// <summary>
+        /// todo: add summary
+        /// </summary>
         IEnumerable<IBranchHead> GetBranchesContainingCommit(ICommit commit, IList<IBranchHead> branches, bool onlyTrackedBranches);
+
+        /// <summary>
+        /// todo: add summary
+        /// </summary>
         IEnumerable<SemanticVersion> GetVersionTagsOnBranch(IBranchHead branch, string tagPrefixRegex);
+
+        /// <summary>
+        /// todo: add summary
+        /// </summary>
+        IMergeMessage ParseMergeMessage(string message);
     }
 }

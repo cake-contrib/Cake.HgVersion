@@ -3,10 +3,6 @@ using NUnit.Framework;
 using Ploeh.AutoFixture;
 using Ploeh.AutoFixture.AutoMoq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VCSVersion.SemanticVersions;
 using VCSVersion.VCS;
 using VCSVersion.VersionCalculation.BaseVersionCalculation;
@@ -43,7 +39,7 @@ namespace VCSVersionTests.VersionCalculation.VersionFilters
                 .Returns(DateTime.UtcNow);
 
             var commit = commitMock.Object;
-            var version = new BaseVersion("dummy", new SemanticVersion(1), commit, false);
+            var version = new BaseVersion("dummy", new SemanticVersion(1), commit);
             var futureDate = DateTimeOffset.UtcNow.AddYears(1);
             var sut = new MinDateVersionFilter(futureDate);
 
@@ -61,7 +57,7 @@ namespace VCSVersionTests.VersionCalculation.VersionFilters
                 .Returns(DateTime.UtcNow);
 
             var commit = commitMock.Object;
-            var version = new BaseVersion("dummy", new SemanticVersion(1), commit, false);
+            var version = new BaseVersion("dummy", new SemanticVersion(1), commit);
             var pastDate = DateTimeOffset.UtcNow.AddYears(-1);
             var sut = new MinDateVersionFilter(pastDate);
 
@@ -74,7 +70,7 @@ namespace VCSVersionTests.VersionCalculation.VersionFilters
         [Test]
         public void ExcludeShouldAcceptVersionWithNullCommit()
         {
-            var version = new BaseVersion("dummy", new SemanticVersion(1), null, false);
+            var version = new BaseVersion("dummy", new SemanticVersion(1), null);
             var futureDate = DateTimeOffset.UtcNow.AddYears(1);
             var sut = new MinDateVersionFilter(futureDate);
 

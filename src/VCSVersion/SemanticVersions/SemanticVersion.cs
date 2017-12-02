@@ -165,6 +165,12 @@ namespace VCSVersion.SemanticVersions
 
         public static bool TryParse(string version, string tagPrefixRegex, out SemanticVersion semanticVersion)
         {
+            if (string.IsNullOrEmpty(version))
+            {
+                semanticVersion = null;
+                return false;
+            }
+
             var match = Regex.Match(version, $"^({tagPrefixRegex})?(?<version>.*)$");
 
             if (!match.Success)

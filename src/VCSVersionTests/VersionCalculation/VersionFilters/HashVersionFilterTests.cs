@@ -48,7 +48,7 @@ namespace VCSVersionTests.VersionCalculation.VersionFilters
                 .ReturnsUsingFixture(_fixture);
 
             var commit = commitMock.Object;
-            var version = new BaseVersion("dummy", new SemanticVersion(1), commit, false);
+            var version = new BaseVersion("dummy", new SemanticVersion(1), commit);
             var sut = new HashVersionFilter(new[] { commit.Hash });
 
             var result = sut.Exclude(version, out var reason);
@@ -65,7 +65,7 @@ namespace VCSVersionTests.VersionCalculation.VersionFilters
                 .ReturnsUsingFixture(_fixture);
 
             var commit = commitMock.Object;
-            var version = new BaseVersion("dummy", new SemanticVersion(1), commit, false);
+            var version = new BaseVersion("dummy", new SemanticVersion(1), commit);
             var sut = new HashVersionFilter(new[] { "mismatched" });
 
             var result = sut.Exclude(version, out var reason);
@@ -77,7 +77,7 @@ namespace VCSVersionTests.VersionCalculation.VersionFilters
         [Test]
         public void ExcludeShouldAcceptVersionWithNullCommit()
         {
-            var version = new BaseVersion("dummy", new SemanticVersion(1), null, false);
+            var version = new BaseVersion("dummy", new SemanticVersion(1), null);
             var sut = new HashVersionFilter(new[] { "mismatched" });
 
             var result = sut.Exclude(version, out var reason);

@@ -28,7 +28,7 @@ namespace VCSVersionTests.VersionCalculation
             var baseCalculatorMock = _fixture.Create<Mock<IBaseVersionCalculator>>();
             baseCalculatorMock.Setup(c => c.CalculateVersion(It.IsAny<IVersionContext>()))
                 .Returns(
-                    new BaseVersion("", new SemanticVersion(1), null, true));
+                    new BaseVersion("", new SemanticVersion(1), null, shouldIncrement: true));
 
             var metadatCalculatorMock = _fixture.Create<Mock<IMetadataCalculator>>();
             metadatCalculatorMock.Setup(m => m.CalculateMetadata(
@@ -39,7 +39,8 @@ namespace VCSVersionTests.VersionCalculation
             var tagCalculatorMock = _fixture.Create<Mock<IPreReleaseTagCalculator>>();
             tagCalculatorMock.Setup(t => t.CalculateTag(
                     It.IsAny<IVersionContext>(),
-                    It.IsAny<SemanticVersion>()))
+                    It.IsAny<SemanticVersion>(),
+                    It.IsAny<string>()))
                 .Returns((PreReleaseTag)null);
             
             var baseCalculator = baseCalculatorMock.Object;

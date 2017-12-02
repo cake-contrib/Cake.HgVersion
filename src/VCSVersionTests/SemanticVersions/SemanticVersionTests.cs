@@ -1,12 +1,23 @@
 ﻿using System;
 using NUnit.Framework;
 using VCSVersion.SemanticVersions;
+using Shouldly;
 
 namespace VCSVersionTests.SemanticVersions
 {
     [TestFixture, Parallelizable(ParallelScope.All)]
     public class SemanticVersionTests
     {
+        [Test]
+        public void TryParseTest_NullInput()
+        {
+            var input = (string)null;
+            var result = SemanticVersion.TryParse(input, null, out var version);
+
+            Assert.That(result, Is.False);
+            Assert.That(version, Is.Null);
+        }
+        
         [TestCase("1.2.3", 1, 2, 3, null, null, null, null, null, null, null, null)]
         [TestCase("1.2", 1, 2, 0, null, null, null, null, null, null, "1.2.0", null)]
         [TestCase("1.2.3-beta", 1, 2, 3, "beta", null, null, null, null, null, null, null)]

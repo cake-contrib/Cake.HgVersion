@@ -17,6 +17,12 @@ namespace VCSVersion.VCS
         ILogQuery Single(string hash);
 
         /// <summary>
+        /// Creates a <see cref="HgLogQuery"/> that finds commits that belong to the named branch.
+        /// </summary>
+        /// <param name="name">Branch name.</param>
+        ILogQuery ByBranch(string name);
+
+        /// <summary>
         /// Create a <see cref="ILogQuery"/> that includes the commit
         /// specified and all ancestor commits.
         /// </summary>

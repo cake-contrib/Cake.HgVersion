@@ -12,7 +12,7 @@ namespace VCSVersion.VersionFilters
         public HashVersionFilter(IEnumerable<string> hashes)
         {
             if (hashes == null)
-                throw new ArgumentNullException("shas");
+                throw new ArgumentNullException(nameof(hashes));
 
             _hashes = hashes;
         }
