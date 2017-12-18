@@ -57,6 +57,9 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
+    <Reference Include="VCSVersion, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\VCSVersion.0.1.1-beta0001\lib\net461\VCSVersion.dll</HintPath>
+    </Reference>
     <Reference Include="YamlDotNet, Version=4.2.2.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\YamlDotNet.4.2.2\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
@@ -87,10 +90,6 @@
     <ProjectReference Include="..\HgVersion\HgVersion.csproj">
       <Project>{0b5ac676-15d0-422a-a54b-5794c8a55716}</Project>
       <Name>HgVersion</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\VCSVersion\VCSVersion.csproj">
-      <Project>{297919b8-481c-44a8-96f0-5ec7f2644a38}</Project>
-      <Name>VCSVersion</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
