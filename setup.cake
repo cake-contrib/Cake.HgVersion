@@ -17,8 +17,8 @@ BuildParameters.PrintParameters(Context);
 ToolSettings.SetToolSettings(
     context: Context,
     dupFinderExcludePattern: new string[] {
-        BuildParameters.RootDirectoryPath + "/src/Cake.HgVersionTests/**/*.cs",
-        BuildParameters.RootDirectoryPath + "/src/Cake.HgVersion/**/*.AssemblyInfo.cs"
+        BuildParameters.RootDirectoryPath + "/src/*Tests/**/*.cs",
+        BuildParameters.RootDirectoryPath + "/src/**/*.AssemblyInfo.cs"
     });
 
 Build.Run();
