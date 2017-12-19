@@ -1,4 +1,6 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
+using Mercurial;
+using NUnit.Framework;
 using VCSVersion;
 using VCSVersion.SemanticVersions;
 
@@ -7,34 +9,40 @@ namespace HgVersionTests
     [TestFixture, Parallelizable(ParallelScope.All)]
     public class VersionFinderTests
     {
-        //[Test]
-        //public void FindVersionTest_OnlyInitedRepository()
-        //{
-        //    using (var context = new TestVesionContext())
-        //    {
-        //        var finder = new VersionFinder();
-        //        var version = finder.FindVersion(context);
-        //        var expected = SemanticVersion.Parse("0.1.0");
-        //        var comparer = new SemanticVersionComarer(SemanticVersionComparation.MajorMinorPatch);
-                
-        //        Assert.That(version, Is.EqualTo(expected).Using(comparer));
-        //    }
-        //}
+        [Test]
+        public void FindVersion_NotInitedRepositoryThrowException()
+        {
+            using (var context = new TestVesionContext(inited: false))
+            {
+                var finder = new VersionFinder();
+                Assert.Throws<DirectoryNotFoundException>(() => finder.FindVersion(context));
+            }
+        }
         
-        //[Test]
-        //public void FindVersionTest()
-        //{
-        //    using (var context = new TestVesionContext())
-        //    {
-        //        context.WriteTextAndCommit("test.txt", "dummy");
+        [Test]
+        public void FindVersion_OnlyInitedRepositoryWithoutFirstCommitThrowException()
+        {
+            using (var context = new TestVesionContext(inited: true))
+            {
+                var finder = new VersionFinder();
+                Assert.Throws<MercurialExecutionException>(() => finder.FindVersion(context));
+            }
+        }
+        
+        [Test]
+        public void FindVersion_WithFirstNonTaggedCommit()
+        {
+            using (var context = new TestVesionContext())
+            {
+                context.WriteTextAndCommit("test.txt", "dummy", "init commit");
 
-        //        var finder = new VersionFinder();
-        //        var version = finder.FindVersion(context);
-        //        var expected = SemanticVersion.Parse("0.1.0");
-        //        var comparer = new SemanticVersionComarer(SemanticVersionComparation.MajorMinorPatch);
+                var finder = new VersionFinder();
+                var version = finder.FindVersion(context);
+                var expected = SemanticVersion.Parse("0.1.0");
+                var comparer = new SemanticVersionComarer(SemanticVersionComparation.MajorMinorPatch);
                 
-        //        Assert.That(version, Is.EqualTo(expected).Using(comparer));
-        //    }
-        //}
+                Assert.That(version, Is.EqualTo(expected).Using(comparer));
+            }
+        }
     }
 }

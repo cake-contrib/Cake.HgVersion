@@ -5,35 +5,47 @@ using System.Threading;
 using HgVersion;
 using HgVersion.VCS;
 using Mercurial;
+using VCSVersion;
+using VCSVersion.Configuration;
+using VCSVersion.Helpers;
+using VCSVersion.SemanticVersions;
 using VCSVersion.VCS;
 
 namespace HgVersionTests
 {
-    public sealed class TestVesionContext : HgVersionContext, IDisposable
+    public sealed class TestVesionContext : IVersionContext, IDisposable
     {
+        private HgVersionContext _context;
+        private Repository _repository;
+        
         static TestVesionContext()
         {
             // added for solve concurrency problems
             if (!Client.CouldLocateClient)
                 throw new MercurialMissingException("The Mercurial command line client could not be located");
         }
-        
-        public TestVesionContext() : base(CreateTempRepository())
-        { }
+
+        public TestVesionContext(bool inited = true)
+        {
+            _repository = CreateTempRepository(inited);
+        }
         
         public void WriteTextAndCommit(string fileName, string content, string commitMessage = null)
         {
-            var repository = (HgRepository)Repository;
-            
-            var path = Path.Combine(repository.Path, fileName);
+            var path = Path.Combine(_repository.Path, fileName);
             var fileInfo = new FileInfo(path);
             var message = GetCommitMessage(fileInfo, commitMessage);
 
             Directory.CreateDirectory(fileInfo.Directory.FullName);
             File.WriteAllText(fileInfo.FullName, content);
 
-            Repository.AddRemove();
-            Repository.Commit(message);
+            _repository.AddRemove();
+            _repository.Commit(message);
+        }
+
+        private IVersionContext GetContext()
+        {
+            return LazyInitializer.EnsureInitialized(ref _context, () => new HgVersionContext(_repository));
         }
         
         private static string GetCommitMessage(FileInfo fileInfo, string commitMessage)
@@ -44,7 +56,7 @@ namespace HgVersionTests
             return fileInfo.Exists ? $"change {fileInfo.Name}" : $"create {fileInfo.Name}";
         }
 
-        private static Repository CreateTempRepository()
+        private static Repository CreateTempRepository(bool inited)
         {
             var repoPath = Path.Combine(
                 Path.GetTempPath(),
@@ -56,12 +68,16 @@ namespace HgVersionTests
             Directory.CreateDirectory(repoPath);
             
             var repository = new Repository(repoPath);
-            repository.Init();
+
+            if (inited)
+            {
+                repository.Init();
+            }
 
             return repository;
         }
 
-        private static void DeleteTempRepository(IRepository repository)
+        private static void DeleteTempRepository(Repository repository)
         {
             for (int index = 1; index < 5; index++)
             {
@@ -85,18 +101,18 @@ namespace HgVersionTests
         }
 
         #region IDisposable Support
-        private bool disposedValue = false;
+        private bool _disposedValue = false;
 
         void Dispose(bool disposing)
         {
-            if (!disposedValue)
+            if (!_disposedValue)
             {
                 if (disposing)
                 {
-                    DeleteTempRepository(Repository);
+                    DeleteTempRepository(_repository);
                 }
                 
-                disposedValue = true;
+                _disposedValue = true;
             }
         }
 
@@ -104,6 +120,18 @@ namespace HgVersionTests
         {
             Dispose(true);
         }
+        #endregion
+
+        #region IVersionContext implementation
+        IRepository IVersionContext.Repository => GetContext().Repository;
+        IFileSystem IVersionContext.FileSystem => GetContext().FileSystem;
+        Config IVersionContext.FullConfiguration => GetContext().FullConfiguration;
+        EffectiveConfiguration IVersionContext.Configuration => GetContext().Configuration;
+        IBranchHead IVersionContext.CurrentBranch => GetContext().CurrentBranch;
+        ICommit IVersionContext.CurrentCommit => GetContext().CurrentCommit;
+        IRepositoryMetadataProvider IVersionContext.RepositoryMetadataProvider => GetContext().RepositoryMetadataProvider;
+        bool IVersionContext.IsCurrentCommitTagged => GetContext().IsCurrentCommitTagged;
+        SemanticVersion IVersionContext.CurrentCommitTaggedVersion => GetContext().CurrentCommitTaggedVersion;
         #endregion
     }
 }

@@ -22,13 +22,13 @@ branches:
     tracks-release-branches: true
     is-release-branch: false
     is-mainline: false
-  master:
+  default:
     mode: ContinuousDelivery
     tag: ''
     increment: Patch
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
-    regex: master$
+    regex: default$
     source-branches:
     - develop
     - release
@@ -44,7 +44,7 @@ branches:
     regex: releases?[/-]
     source-branches:
     - develop
-    - master
+    - default
     - support
     - release
     tracks-release-branches: false
@@ -59,7 +59,7 @@ branches:
     regex: features?[/-]
     source-branches:
     - develop
-    - master
+    - default
     - release
     - feature
     - support
@@ -77,7 +77,7 @@ branches:
     regex: (pull|pull\-requests|pr)[/-]
     source-branches:
     - develop
-    - master
+    - default
     - release
     - feature
     - support
@@ -94,7 +94,7 @@ branches:
     regex: hotfix(es)?[/-]
     source-branches:
     - develop
-    - master
+    - default
     - support
     tracks-release-branches: false
     is-release-branch: false
@@ -107,7 +107,7 @@ branches:
     track-merge-target: false
     regex: support[/-]
     source-branches:
-    - master
+    - default
     tracks-release-branches: false
     is-release-branch: false
     is-mainline: true
