@@ -15,16 +15,6 @@ namespace HgVersionTests
             using (var context = new TestVesionContext(inited: false))
             {
                 var finder = new VersionFinder();
-                Assert.Throws<DirectoryNotFoundException>(() => finder.FindVersion(context));
-            }
-        }
-        
-        [Test]
-        public void FindVersion_OnlyInitedRepositoryWithoutFirstCommitThrowException()
-        {
-            using (var context = new TestVesionContext(inited: true))
-            {
-                var finder = new VersionFinder();
                 Assert.Throws<MercurialExecutionException>(() => finder.FindVersion(context));
             }
         }

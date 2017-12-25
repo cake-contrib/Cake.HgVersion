@@ -235,18 +235,6 @@ namespace HgVersionTests.Configuration
             propertiesMissingAlias.ShouldBeEmpty();
         }
 
-        [TestCase(HgConfigurationProvider.DefaultConfigFileName, HgConfigurationProvider.DefaultConfigFileName)]
-        public void ThrowsExceptionOnAmbiguousConfigFileLocation(string repoConfigFile, string workingConfigFile)
-        {
-            var repositoryConfigFilePath = SetupConfigFileContent(string.Empty, repoConfigFile, repoPath);
-            var workingDirectoryConfigFilePath = SetupConfigFileContent(string.Empty, workingConfigFile, workingPath);
-
-            var exception = Should.Throw<WarningException>(() => { HgConfigurationProvider.Verify(workingPath, repoPath, fileSystem); });
-
-            var expecedMessage = string.Format("Ambiguous config file selection from '{0}' and '{1}'", workingDirectoryConfigFilePath, repositoryConfigFilePath);
-            exception.Message.ShouldBe(expecedMessage);
-        }
-
         [Test]
         public void NoWarnOnHgVersionYmlFile()
         {
