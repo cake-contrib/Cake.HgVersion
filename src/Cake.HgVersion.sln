@@ -5,8 +5,6 @@ VisualStudioVersion = 15.0.27004.2005
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.HgVersion", "Cake.HgVersion\Cake.HgVersion.csproj", "{FF5674B2-C3AC-4E82-8360-655D822ECCC5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Cake.HgVersionTests", "Cake.HgVersionTests\Cake.HgVersionTests.csproj", "{A28F788F-4325-4675-9108-1DCA720179D0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HgVersionTests", "HgVersionTests\HgVersionTests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HgVersion", "HgVersion\HgVersion.csproj", "{0B5AC676-15D0-422A-A54B-5794C8A55716}"
@@ -21,10 +19,6 @@ Global
 		{FF5674B2-C3AC-4E82-8360-655D822ECCC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FF5674B2-C3AC-4E82-8360-655D822ECCC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FF5674B2-C3AC-4E82-8360-655D822ECCC5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A28F788F-4325-4675-9108-1DCA720179D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A28F788F-4325-4675-9108-1DCA720179D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A28F788F-4325-4675-9108-1DCA720179D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A28F788F-4325-4675-9108-1DCA720179D0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8EDF4429-251A-416D-BB68-93F227191BCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
