@@ -2,7 +2,7 @@
 // ReSharper disable CheckNamespace
 // ReSharper disable UnusedMember.Global
 
-namespace Cake.HgVersion.Aliases
+namespace Cake.HgVersion
 {
     /// <summary>
     /// This namespace contains aliases for versioning projects
