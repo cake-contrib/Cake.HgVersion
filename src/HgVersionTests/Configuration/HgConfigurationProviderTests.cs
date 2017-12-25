@@ -19,19 +19,14 @@ namespace HgVersionTests.Configuration
     [TestFixture, Parallelizable(ParallelScope.Self)]
     public class HgConfigurationProviderTests
     {
-        private const string DefaultRepoPath = "c:\\MyHgRepo";
-        private const string DefaultWorkingPath = "c:\\MyHgRepo\\Working";
-
         private string repoPath;
-        private string workingPath;
         private IFileSystem fileSystem;
 
         [SetUp]
         public void Setup()
         {
             fileSystem = new TestFileSystem();
-            repoPath = DefaultRepoPath;
-            workingPath = DefaultWorkingPath;
+            repoPath = "c:\\MyHgRepo";
         }
         
         [Test]
