@@ -21,5 +21,7 @@
         <file src="VCSVersion.xml" target="lib\net461" />
         <file src="Mercurial.Net.dll" target="lib\net461" />
         <file src="Mercurial.Net.xml" target="lib\net461" />
+        <file src="YamlDotNet.dll" target="lib\net461" />
+        <file src="YamlDotNet.xml" target="lib\net461" />
     </files>
 </package>
