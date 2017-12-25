@@ -20,6 +20,15 @@ namespace Cake.HgVersion
     [CakeAliasCategory("HgVersion")]
     public static class Aliases
     {
+        static Aliases()
+        {
+            Logger.SetLoggers(
+                s => Console.WriteLine(s),
+                s => Console.WriteLine(s),
+                s => Console.WriteLine(s),
+                s => Console.WriteLine(s));
+        }
+        
         /// <summary>
         /// Return information about current project version.
         /// </summary>
@@ -32,15 +41,18 @@ namespace Cake.HgVersion
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
 
-            var path = repositoryPath.MakeAbsolute(context.Environment);
-            var repository = new Repository(path.FullPath);
-            var versionContext = new HgVersionContext((HgRepository)repository);
+            using (context.AddLoggers())
+            {
+                var path = repositoryPath.MakeAbsolute(context.Environment);
+                var repository = new Repository(path.FullPath);
+                var versionContext = new HgVersionContext((HgRepository)repository);
 
-            var finder = new VersionFinder();
-            var version = finder.FindVersion(versionContext);
-            var variables = version.ToVersionVariables(versionContext);
+                var finder = new VersionFinder();
+                var version = finder.FindVersion(versionContext);
+                var variables = version.ToVersionVariables(versionContext);
             
-            return variables;
+                return variables;   
+            }
         }
 
         /// <summary>
@@ -55,6 +67,7 @@ namespace Cake.HgVersion
             var assemblyInfoFile = "SolutionInfo.cs";
             var fileSystem = new VCSVersion.Helpers.FileSystem();
             
+            using (context.AddLoggers())
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFile, workingDirectory.FullPath, variables, fileSystem, true))
             {
                 assemblyInfoFileUpdater.Update();

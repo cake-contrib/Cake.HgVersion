@@ -11,14 +11,15 @@
         <iconUrl>https://raw.githubusercontent.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</iconUrl>
         <projectUrl>https://github.com/vCipher/Cake.HgVersion</projectUrl>
         <tags>cake hg mercurial semver</tags>
-        <dependencies>
-            <dependency id="VCSVersion" version="0.1.2" />
-        </dependencies>
     </metadata>
     <files>
         <file src="Cake.HgVersion.dll" target="lib\net461" />
         <file src="Cake.HgVersion.xml" target="lib\net461" />
         <file src="HgVersion.dll" target="lib\net461" />
         <file src="HgVersion.xml" target="lib\net461" />
+        <file src="VCSVersion.dll" target="lib\net461" />
+        <file src="VCSVersion.xml" target="lib\net461" />
+        <file src="Mercurial.Net.dll" target="lib\net461" />
+        <file src="Mercurial.Net.xml" target="lib\net461" />
     </files>
 </package>
