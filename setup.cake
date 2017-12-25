@@ -10,6 +10,7 @@ BuildParameters.SetParameters(
     repositoryOwner: "vCipher",
     repositoryName: "Cake.HgVersion",
     appVeyorAccountName: "vCipher",
+    shouldRunCodecov: false,
     solutionFilePath: "./src/Cake.HgVersion.sln");
 
 BuildParameters.PrintParameters(Context);
