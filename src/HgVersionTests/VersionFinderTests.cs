@@ -1,4 +1,4 @@
-﻿using System.IO;
+﻿﻿using System.IO;
 using Mercurial;
 using NUnit.Framework;
 using VCSVersion;
@@ -13,16 +13,6 @@ namespace HgVersionTests
         public void FindVersion_NotInitedRepositoryThrowException()
         {
             using (var context = new TestVesionContext(inited: false))
-            {
-                var finder = new VersionFinder();
-                Assert.Throws<MercurialExecutionException>(() => finder.FindVersion(context));
-            }
-        }
-        
-        [Test]
-        public void FindVersion_OnlyInitedRepositoryWithoutFirstCommitThrowException()
-        {
-            using (var context = new TestVesionContext(inited: true))
             {
                 var finder = new VersionFinder();
                 Assert.Throws<MercurialExecutionException>(() => finder.FindVersion(context));
