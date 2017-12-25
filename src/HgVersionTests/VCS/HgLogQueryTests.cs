@@ -1,4 +1,5 @@
 ﻿using HgVersion.VCS;
+using Mercurial;
 using NUnit.Framework;
 
 namespace HgVersionTests.VCS
@@ -27,6 +28,15 @@ namespace HgVersionTests.VCS
                 .Parents();
 
             Assert.That(query.Revision.ToString(), Is.EqualTo($"parents({hash})"));
+        }
+
+        [Test]
+        public void ExceptTaggingCommitsTest()
+        {
+            var query = new HgLogQuery(RevSpec.All)
+                .ExceptTaggingCommits();
+            
+            Assert.That(query.Revision.ToString(), Is.EqualTo("all() - (file(.hgtags) and (not tag()))"));
         }
     }
 }

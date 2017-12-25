@@ -30,8 +30,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
             var fullPath = Path.Combine(workingDir, assemblyInfoFile);
 
             var version = SemanticVersion.Parse("1.0.0", "v");
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
 
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFile, workingDir, variables, fileSystem, true))
             {
@@ -56,8 +55,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
             var fullPath = Path.Combine(workingDir, assemblyInfoFile);
 
             var version = SemanticVersion.Parse("1.0.0", "v");
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
 
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFile, workingDir, variables, fileSystem, true))
             {
@@ -85,8 +83,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
             };
 
             var version = SemanticVersion.Parse("1.0.0", "v");
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
 
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFiles, workingDir, variables, fileSystem, true))
             {
@@ -115,8 +112,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
             var fullPath = Path.Combine(workingDir, assemblyInfoFile);
 
             var version = SemanticVersion.Parse("1.0.0", "v");
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
 
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFile, workingDir, variables, fileSystem, false))
             {
@@ -136,8 +132,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
             var fileSystem = fileSystemMock.Object;
 
             var version = SemanticVersion.Parse("1.0.0", "v");
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
 
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFile, workingDir, variables, fileSystem, true))
             {
@@ -158,8 +153,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
             var fileSystem = fileSystemMock.Object;
 
             var version = SemanticVersion.Parse("1.0.0", "v");
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
 
             using (var assemblyInfoFileUpdater = new AssemblyInfoFileUpdater(assemblyInfoFiles, workingDir, variables, fileSystem, false))
             {
@@ -433,8 +427,7 @@ namespace HgVersionTests.VersionAssemblyInfoResources
                 });
 
             var config = new TestEffectiveConfiguration(assemblyVersioningScheme: versioningScheme);
-            var builder = new VersionVariablesBuilder(version, config);
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(config);
 
             verify(fileSystem, variables);
         }

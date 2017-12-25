@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using VCSVersion.AssemblyVersioning;
 using VCSVersion.Configuration;
 using VCSVersion.VersionCalculation;
 using VCSVersion.VersionCalculation.IncrementStrategies;
-using VCSVersion.VersionFilters;
+using VCSVersion.VersionCalculation.VersionFilters;
 
 
 namespace HgVersionTests.Configuration

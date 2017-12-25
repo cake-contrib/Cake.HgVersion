@@ -39,7 +39,7 @@ namespace HgVersionTests
                 var finder = new VersionFinder();
                 var version = finder.FindVersion(context);
                 var expected = SemanticVersion.Parse("0.1.0");
-                var comparer = new SemanticVersionComarer(SemanticVersionComparation.MajorMinorPatch);
+                var comparer = new SemanticVersionComparer(SemanticVersionComparation.MajorMinorPatch);
                 
                 Assert.That(version, Is.EqualTo(expected).Using(comparer));
             }

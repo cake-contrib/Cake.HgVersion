@@ -45,11 +45,11 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="VCSVersion, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\VCSVersion.0.1.1-beta0001\lib\net461\VCSVersion.dll</HintPath>
+    <Reference Include="VCSVersion, Version=0.1.2.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\VCSVersion.0.1.2\lib\net461\VCSVersion.dll</HintPath>
     </Reference>
-    <Reference Include="YamlDotNet, Version=4.2.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\YamlDotNet.4.2.2\lib\net35\YamlDotNet.dll</HintPath>
+    <Reference Include="YamlDotNet, Version=4.2.3.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\YamlDotNet.4.2.3\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

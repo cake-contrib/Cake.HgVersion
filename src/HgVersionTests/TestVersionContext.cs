@@ -16,7 +16,7 @@ namespace HgVersionTests
     public sealed class TestVesionContext : IVersionContext, IDisposable
     {
         private HgVersionContext _context;
-        private Repository _repository;
+        private IHgRepository _repository;
         
         static TestVesionContext()
         {
@@ -27,7 +27,8 @@ namespace HgVersionTests
 
         public TestVesionContext(bool inited = true)
         {
-            _repository = CreateTempRepository(inited);
+            _repository = CreateTempRepository(inited)
+                .WithLogger();
         }
         
         public void WriteTextAndCommit(string fileName, string content, string commitMessage = null)
@@ -42,8 +43,33 @@ namespace HgVersionTests
             _repository.AddRemove();
             _repository.Commit(message);
         }
+        
+        public void MakeTaggedCommit(string tag)
+        {
+            _repository.Tag(tag);
+        }
+        
+        public void MakeCommit(string message = null)
+        {
+            WriteTextAndCommit("dummy.txt", DateTime.Now.ToLongTimeString(), message ?? "Empty commit");
+        }
+        
+        public void CreateBranch(string branch)
+        {
+            _repository.Branch(branch);
+        }
 
-        private IVersionContext GetContext()
+        public ICommit Tip()
+        {
+            return _repository.Tip();
+        }
+
+        public void Update(RevSpec rev)
+        {
+            _repository.Update(rev);
+        }
+        
+        private HgVersionContext GetContext()
         {
             return LazyInitializer.EnsureInitialized(ref _context, () => new HgVersionContext(_repository));
         }
@@ -56,7 +82,7 @@ namespace HgVersionTests
             return fileInfo.Exists ? $"change {fileInfo.Name}" : $"create {fileInfo.Name}";
         }
 
-        private static Repository CreateTempRepository(bool inited)
+        private static IHgRepository CreateTempRepository(bool inited)
         {
             var repoPath = Path.Combine(
                 Path.GetTempPath(),
@@ -74,10 +100,10 @@ namespace HgVersionTests
                 repository.Init();
             }
 
-            return repository;
+            return (HgRepository)repository;
         }
 
-        private static void DeleteTempRepository(Repository repository)
+        private static void DeleteTempRepository(IRepository repository)
         {
             for (int index = 1; index < 5; index++)
             {
@@ -123,15 +149,15 @@ namespace HgVersionTests
         #endregion
 
         #region IVersionContext implementation
-        IRepository IVersionContext.Repository => GetContext().Repository;
-        IFileSystem IVersionContext.FileSystem => GetContext().FileSystem;
-        Config IVersionContext.FullConfiguration => GetContext().FullConfiguration;
-        EffectiveConfiguration IVersionContext.Configuration => GetContext().Configuration;
-        IBranchHead IVersionContext.CurrentBranch => GetContext().CurrentBranch;
-        ICommit IVersionContext.CurrentCommit => GetContext().CurrentCommit;
-        IRepositoryMetadataProvider IVersionContext.RepositoryMetadataProvider => GetContext().RepositoryMetadataProvider;
-        bool IVersionContext.IsCurrentCommitTagged => GetContext().IsCurrentCommitTagged;
-        SemanticVersion IVersionContext.CurrentCommitTaggedVersion => GetContext().CurrentCommitTaggedVersion;
+        public IRepository Repository => GetContext().Repository;
+        public IFileSystem FileSystem => GetContext().FileSystem;
+        public Config FullConfiguration => GetContext().FullConfiguration;
+        public EffectiveConfiguration Configuration => GetContext().Configuration;
+        public IBranchHead CurrentBranch => GetContext().CurrentBranch;
+        public ICommit CurrentCommit => GetContext().CurrentCommit;
+        public IRepositoryMetadataProvider RepositoryMetadataProvider => GetContext().RepositoryMetadataProvider;
+        public bool IsCurrentCommitTagged => GetContext().IsCurrentCommitTagged;
+        public SemanticVersion CurrentCommitTaggedVersion => GetContext().CurrentCommitTaggedVersion;
         #endregion
     }
 }

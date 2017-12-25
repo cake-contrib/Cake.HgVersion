@@ -34,8 +34,7 @@ namespace HgVersionTests.VersionInformationResources
                     "commitSha", DateTimeOffset.Parse("2014-03-06 23:59:59Z"))
             );
 
-            var builder = new VersionVariablesBuilder(version, new TestEffectiveConfiguration());
-            var variables = builder.Build();
+            var variables = version.ToVersionVariables(new TestEffectiveConfiguration());
             var generator = new VersionInformationGenerator(fileName, directory, variables, fileSystem);
             generator.Generate();
 
