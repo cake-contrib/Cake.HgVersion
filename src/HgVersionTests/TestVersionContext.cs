@@ -51,7 +51,7 @@ namespace HgVersionTests
         
         public void MakeCommit(string message = null)
         {
-            WriteTextAndCommit("dummy.txt", DateTime.Now.ToLongTimeString(), message ?? "Empty commit");
+            WriteTextAndCommit("dummy.txt", Guid.NewGuid().ToString(), message ?? "Empty commit");
         }
         
         public void CreateBranch(string branch)
