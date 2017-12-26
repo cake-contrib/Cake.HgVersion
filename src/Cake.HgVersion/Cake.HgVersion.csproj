@@ -45,6 +45,9 @@
     <Reference Include="VCSVersion, Version=0.1.2.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\VCSVersion.0.1.2\lib\net461\VCSVersion.dll</HintPath>
     </Reference>
+    <Reference Include="Mercurial.Net, Version=0.1.1.0, Culture=neutral, PublicKeyToken=null">
+      <HintPath>..\packages\Hg.Net.0.1.1\lib\net461\Mercurial.Net.dll</HintPath>
+    </Reference>
     <Reference Include="YamlDotNet, Version=4.2.3.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\YamlDotNet.4.2.3\lib\net35\YamlDotNet.dll</HintPath>
     </Reference>
