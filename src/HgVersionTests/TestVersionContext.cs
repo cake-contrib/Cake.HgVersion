@@ -18,13 +18,6 @@ namespace HgVersionTests
         private HgVersionContext _context;
         private IHgRepository _repository;
         
-        static TestVesionContext()
-        {
-            // added for solve concurrency problems
-            if (!Client.CouldLocateClient)
-                throw new MercurialMissingException("The Mercurial command line client could not be located");
-        }
-
         public TestVesionContext(bool inited = true)
         {
             _repository = CreateTempRepository(inited)
