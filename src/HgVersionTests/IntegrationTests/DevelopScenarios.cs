@@ -2,12 +2,26 @@
 using NUnit.Framework;
 using VCSVersion.Configuration;
 using VCSVersion.VersionCalculation;
+using System.Text;
 
 namespace HgVersionTests.IntegrationTests
 {
     [TestFixture, Parallelizable(ParallelScope.All)]
     public class DevelopScenarios
     {
+        private static IEnumerable<string> BranchNames
+        {
+            get
+            {
+                if (Encoding.Default == Encoding.GetEncoding("Windows-1251"))
+                {
+                    yield return "ветка";
+                }
+            }
+
+        }
+
+
         [Test]
         public void WhenDevelopHasMultipleCommits_SpecifyExistingCommitId()
         {
@@ -159,43 +173,57 @@ namespace HgVersionTests.IntegrationTests
                 context.AssertFullSemver(config, "1.1.0-alpha.7");
             }
         }
-        
-//        [Test]
-//        public void WhenDevelopBranchedFromMasterDetachedHead_MinorIsIncreased()
-//        {
-//            using (var fixture = new EmptyRepositoryFixture())
-//            {
-//                fixture.Repository.MakeATaggedCommit("1.0.0");
-//                Commands.Checkout(fixture.Repository, fixture.Repository.CreateBranch("develop"));
-//                fixture.Repository.MakeACommit();
-//                var commit = fixture.Repository.Head.Tip;
-//                fixture.Repository.MakeACommit();
-//                Commands.Checkout(fixture.Repository, commit);
-//                fixture.AssertFullSemver("1.1.0-alpha.1");
-//            }
-//        }
-        
-//        [Test]
-//        public void InheritVersionFromReleaseBranch()
-//        {
-//            using (var fixture = new EmptyRepositoryFixture())
-//            {
-//                fixture.MakeATaggedCommit("1.0.0");
-//                fixture.BranchTo("develop");
-//                fixture.MakeACommit();
-//                fixture.BranchTo("release/2.0.0");
-//                fixture.MakeACommit();
-//                fixture.MakeACommit();
-//                fixture.Checkout("develop");
-//                fixture.AssertFullSemver("1.1.0-alpha.1");
-//                fixture.MakeACommit();
-//                fixture.AssertFullSemver("2.1.0-alpha.1");
-//                fixture.MergeNoFF("release/2.0.0");
-//                fixture.AssertFullSemver("2.1.0-alpha.4");
-//                fixture.BranchTo("feature/MyFeature");
-//                fixture.MakeACommit();
-//                fixture.AssertFullSemver("2.1.0-MyFeature.1+5");
-//            }
-//        }
+
+        [Test]
+        [TestCaseSource(nameof(BranchNames))]
+        public void WhenBranchNameHasRUChars_ItIsStillWorking(string branchName)
+        {
+            using (var context = new TestVesionContext())
+            {
+                context.WriteTextAndCommit("dummy.txt", "", "init commit");
+                context.CreateBranch(branchName);
+                context.WriteTextAndCommit("dummy.txt", "", "2nd commit");
+                Assert.That(context.CurrentBranch.Name, Is.EqualTo(branchName));
+
+            }
+        }
+
+        //        [Test]
+        //        public void WhenDevelopBranchedFromMasterDetachedHead_MinorIsIncreased()
+        //        {
+        //            using (var fixture = new EmptyRepositoryFixture())
+        //            {
+        //                fixture.Repository.MakeATaggedCommit("1.0.0");
+        //                Commands.Checkout(fixture.Repository, fixture.Repository.CreateBranch("develop"));
+        //                fixture.Repository.MakeACommit();
+        //                var commit = fixture.Repository.Head.Tip;
+        //                fixture.Repository.MakeACommit();
+        //                Commands.Checkout(fixture.Repository, commit);
+        //                fixture.AssertFullSemver("1.1.0-alpha.1");
+        //            }
+        //        }
+
+        //        [Test]
+        //        public void InheritVersionFromReleaseBranch()
+        //        {
+        //            using (var fixture = new EmptyRepositoryFixture())
+        //            {
+        //                fixture.MakeATaggedCommit("1.0.0");
+        //                fixture.BranchTo("develop");
+        //                fixture.MakeACommit();
+        //                fixture.BranchTo("release/2.0.0");
+        //                fixture.MakeACommit();
+        //                fixture.MakeACommit();
+        //                fixture.Checkout("develop");
+        //                fixture.AssertFullSemver("1.1.0-alpha.1");
+        //                fixture.MakeACommit();
+        //                fixture.AssertFullSemver("2.1.0-alpha.1");
+        //                fixture.MergeNoFF("release/2.0.0");
+        //                fixture.AssertFullSemver("2.1.0-alpha.4");
+        //                fixture.BranchTo("feature/MyFeature");
+        //                fixture.MakeACommit();
+        //                fixture.AssertFullSemver("2.1.0-MyFeature.1+5");
+        //            }
+        //        }
     }
 }
