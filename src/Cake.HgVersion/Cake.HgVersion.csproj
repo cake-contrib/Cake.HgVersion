@@ -38,8 +38,8 @@
     <Reference Include="Cake.Core, Version=0.23.0.0, Culture=neutral, PublicKeyToken=null">
       <HintPath>..\packages\Cake.Core.0.23.0\lib\net46\Cake.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Mercurial.Net, Version=0.1.4.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hg.Net.0.1.4\lib\net461\Mercurial.Net.dll</HintPath>
+    <Reference Include="Mercurial.Net, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Hg.Net.0.1.5\lib\net461\Mercurial.Net.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
