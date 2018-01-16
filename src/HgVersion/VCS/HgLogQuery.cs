@@ -62,6 +62,7 @@ namespace HgVersion.VCS
         {
             return Revision.Except(
                 RevSpec.Affects(".hgtags") &
+                RevSpec.Grep("Added tag .+ for changeset .+") &
                 !RevSpec.Tagged());
         }
 
