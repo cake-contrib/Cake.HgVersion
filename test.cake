@@ -32,26 +32,26 @@ Teardown(ctx =>
     // Executed AFTER the last task.
     // Information("Finished running tasks.");
 
-    // try
-    // {
-    //     Information("Trying to clean up test repo {0}", testRepo);
-    //     if (DirectoryExists(testRepo))
-    //     {
-    //         ForceDeleteDirectory(testRepo.FullPath);
-    //     }
-    //     if (DirectoryExists(testRepo))
-    //     {
-    //         Warning("Failed to clean {0}", testRepo);
-    //     }
-    //     else
-    //     {
-    //         Information("Successfully cleaned test repo {0}", testRepo);
-    //     }
-    // }
-    // catch(Exception ex)
-    // {
-    //     Error("Failed to clean up test reop {0}\r\n{1}", testRepo, ex);
-    // }
+    try
+    {
+        Information("Trying to clean up test repo {0}", testRepo);
+        if (DirectoryExists(testRepo))
+        {
+            ForceDeleteDirectory(testRepo.FullPath);
+        }
+        if (DirectoryExists(testRepo))
+        {
+            Warning("Failed to clean {0}", testRepo);
+        }
+        else
+        {
+            Information("Successfully cleaned test repo {0}", testRepo);
+        }
+    }
+    catch(Exception ex)
+    {
+        Error("Failed to clean up test reop {0}\r\n{1}", testRepo, ex);
+    }
 });
 
 ///////////////////////////////////////////////////////////////////////////////
