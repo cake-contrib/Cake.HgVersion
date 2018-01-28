@@ -1,83 +1,31 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FF5674B2-C3AC-4E82-8360-655D822ECCC5}</ProjectGuid>
-    <ProjectTypeGuids>{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Cake.HgVersion</RootNamespace>
+    <TargetFrameworks>net461</TargetFrameworks>
     <AssemblyName>Cake.HgVersion</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PackageId>Cake.HgVersion</PackageId>
+    <Authors>vCipher</Authors>
+    <Description>Cake AddIn that extends Cake with SemVer versioning using Mercurial history</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <Copyright>Copyright © vCipher 2018</Copyright>
+    <PackageProjectUrl>https://github.com/vCipher/Cake.HgVersion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/vCipher/Cake.HgVersion</RepositoryUrl>
+    <PackageTags>cake mercurial semver</PackageTags>
+    <PackageIconUrl>https://raw.githubusercontent.com/cake-contrib/graphics/a5cf0f881c390650144b2243ae551d5b9f836196/png/cake-contrib-medium.png</PackageIconUrl>
+    <NoWarn>1591</NoWarn>
     <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Cake.HgVersion.xml</DocumentationFile>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Cake.HgVersion.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Cake.Core, Version=0.23.0.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\Cake.Core.0.23.0\lib\net46\Cake.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="Mercurial.Net, Version=0.1.5.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Hg.Net.0.1.5\lib\net461\Mercurial.Net.dll</HintPath>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
-    <Reference Include="VCSVersion, Version=0.1.5.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\VCSVersion.0.1.5\lib\net461\VCSVersion.dll</HintPath>
-    </Reference>
-    <Reference Include="YamlDotNet, Version=4.2.3.0, Culture=neutral, PublicKeyToken=null">
-      <HintPath>..\packages\YamlDotNet.4.2.3\lib\net35\YamlDotNet.dll</HintPath>
-    </Reference>
+    <Content Include="bin\$(Configuration)\net461\Mercurial.Net.dll" PackagePath="lib\net461\" />
+    <Content Include="bin\$(Configuration)\net461\VCSVersion.dll" PackagePath="lib\net461\" />
+    <Content Include="bin\$(Configuration)\net461\HgVersion.dll" PackagePath="lib\net461\" />
+    <Content Include="bin\$(Configuration)\net461\YamlDotNet.dll" PackagePath="lib\net461\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Aliases.cs" />
-    <Compile Include="ExtensionMethods.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Properties\Namespaces.cs" />
+    <PackageReference Include="Cake.Core" Version="0.24.0" PrivateAssets="true" />
+    <PackageReference Include="Hg.Net" Version="0.1.5" PrivateAssets="true" />
+    <PackageReference Include="VCSVersion" Version="0.1.6" PrivateAssets="true" />
+    <PackageReference Include="HgVersion" Version="0.1.9" PrivateAssets="true" />
+    <PackageReference Include="YamlDotNet" Version="4.2.3" PrivateAssets="true" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="$(SolutionDir)\SolutionInfo.cs" Condition="Exists('$(SolutionDir)\SolutionInfo.cs')">
-      <Link>Properties\SolutionInfo.cs</Link>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HgVersion\HgVersion.csproj">
-      <Project>{0b5ac676-15d0-422a-a54b-5794c8a55716}</Project>
-      <Name>HgVersion</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
 </Project>

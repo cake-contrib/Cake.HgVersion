@@ -2,24 +2,45 @@
 
 Environment.SetVariableNames();
 
-BuildParameters.SetParameters(
-    context: Context,
+BuildParameters.SetParameters(context: Context,
     buildSystem: BuildSystem,
     sourceDirectoryPath: "./src",
     title: "Cake.HgVersion",
     repositoryOwner: "vCipher",
     repositoryName: "Cake.HgVersion",
     appVeyorAccountName: "vCipher",
+    solutionFilePath: "./src/Cake.HgVersion.sln",
     shouldRunCodecov: false,
-    solutionFilePath: "./src/Cake.HgVersion.sln");
+    shouldRunDotNetCorePack: true,
+    shouldRunIntegrationTests: true,
+    wyamSourceFiles: "../../src/**/{!bin,!obj,!packages,!*Tests,}/**/*.cs");
 
 BuildParameters.PrintParameters(Context);
+ToolSettings.SetToolSettings(context: Context);
 
-ToolSettings.SetToolSettings(
-    context: Context,
-    dupFinderExcludePattern: new string[] {
-        BuildParameters.RootDirectoryPath + "/src/*Tests/**/*.cs",
-        BuildParameters.RootDirectoryPath + "/src/**/*.AssemblyInfo.cs"
-    });
+Task("Unzip-Addin")
+    .IsDependentOn("Package")
+    .Does(() =>
+{
+    var addin = BuildParameters.Title;
+    var semVersion = BuildParameters.Version.SemVersion;
+    var nugetRoot = BuildParameters.Paths.Directories.NuGetPackages;
+    var package = $"{nugetRoot}/{addin}.{semVersion}.nupkg";
+    var addinDir = MakeAbsolute(Directory($"./tools/Addins/{addin}/{addin}"));
+    
+    if (DirectoryExists(addinDir))
+    {
+        DeleteDirectory(addinDir, new DeleteDirectorySettings {
+            Recursive = true,
+            Force = true
+        });
+    }
 
-Build.Run();
+    Unzip(package, addinDir);
+});
+
+BuildParameters.Tasks.IntegrationTestTask.IsDependentOn("Unzip-Addin");
+BuildParameters.Tasks.PublishMyGetPackagesTask.IsDependentOn("Run-Integration-Tests");
+BuildParameters.Tasks.PublishNuGetPackagesTask.IsDependentOn("Run-Integration-Tests");
+
+Build.RunDotNetCore();

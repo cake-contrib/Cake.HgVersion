@@ -10,6 +10,8 @@ using VCSVersion;
 using VCSVersion.Output;
 using VCSVersion.SemanticVersions;
 
+// ReSharper disable UnusedMember.Global
+
 namespace Cake.HgVersion
 {
     /// <summary>
@@ -24,23 +26,30 @@ namespace Cake.HgVersion
         static Aliases()
         {
             Logger.SetLoggers(
-                s => Console.WriteLine(s),
-                s => Console.WriteLine(s),
-                s => Console.WriteLine(s),
-                s => Console.WriteLine(s));
+                s => { /* empty */ },
+                s => { /* empty */ },
+                s => { /* empty */ },
+                s => { /* empty */ });
         }
-        
+
         /// <summary>
         /// Return information about current project version.
         /// </summary>
+        /// <example>
+        /// <code>
+        ///     var version = GetVersion("./");
+        /// </code>
+        /// </example>
         /// <param name="context">Cake context</param>
         /// <param name="repositoryPath">Path to repository</param>
         /// <returns>Current project version</returns>
         [CakeMethodAlias]
         public static VersionVariables GetVersion(this ICakeContext context, DirectoryPath repositoryPath)
         {
+            #region Arguments check (DupFinder Exclusion)
             if (context == null) throw new ArgumentNullException(nameof(context));
             if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
+            #endregion
 
             var path = repositoryPath.MakeAbsolute(context.Environment);
 
@@ -60,6 +69,14 @@ namespace Cake.HgVersion
         /// <summary>
         /// Set version tag to current commit.
         /// </summary>
+        /// <example>
+        /// <code>
+        ///     if (SetVersionTag("./src", version))
+        ///     {
+        ///         Information("Semantic version tag set");
+        ///     }
+        /// </code>
+        /// </example>
         /// <param name="context">Cake context</param>
         /// <param name="repositoryPath">Path to repository</param>
         /// <param name="variables">Version information variables</param>
@@ -67,6 +84,11 @@ namespace Cake.HgVersion
         [CakeMethodAlias]
         public static bool SetVersionTag(this ICakeContext context, DirectoryPath repositoryPath, VersionVariables variables)
         {
+            #region Arguments check (DupFinder Exclusion)
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (repositoryPath == null) throw new ArgumentNullException(nameof(repositoryPath));
+            #endregion
+
             var path = repositoryPath.MakeAbsolute(context.Environment);
 
             using (context.AddLoggers())
@@ -75,31 +97,41 @@ namespace Cake.HgVersion
                 var version = SemanticVersion.Parse(variables.FullSemVer);
                 var versionContext = new HgVersionContext((HgRepository)repository);
 
-                if (!versionContext.IsCurrentCommitTagged || version > versionContext.CurrentCommitTaggedVersion)
-                {
-                    var commit = versionContext.CurrentCommit.Hash;
-                    var command = new TagCommand()
-                        .WithName(variables.SemVer)
-                        .WithRevision(commit);
+                if (versionContext.IsCurrentCommitTagged && version <= versionContext.CurrentCommitTaggedVersion)
+                    return false;
+                
+                var commit = versionContext.CurrentCommit.Hash;
+                var command = new TagCommand()
+                    .WithName(variables.SemVer)
+                    .WithRevision(commit);
 
-                    repository.Tag(command);
-                    return true;
-                }
-
-                return false;
+                repository.Tag(command);
+                return true;
             }
         }
 
         /// <summary>
         /// Update assembly info file or generate if threre is no such file.
         /// </summary>
+        /// <example>
+        /// <code>
+        ///     UpdateAssemblyInfo(version, "./", "AssemblyInfo.cs");
+        /// </code>
+        /// </example>
         /// <param name="context">Cake context</param>
         /// <param name="variables">Version information variables</param>
         /// <param name="workingDirectory">Directory where assembly info file is located</param>
+        /// <param name="assemblyInfoFile">Name of file with assemly information</param>
         [CakeMethodAlias]
-        public static void UpdateAssemblyInfo(this ICakeContext context, VersionVariables variables, DirectoryPath workingDirectory)
+        public static void UpdateAssemblyInfo(this ICakeContext context, VersionVariables variables, DirectoryPath workingDirectory, string assemblyInfoFile = "SolutionInfo.cs")
         {
-            var assemblyInfoFile = "SolutionInfo.cs";
+            #region Arguments check (DupFinder Exclusion)
+            if (context == null) throw new ArgumentNullException(nameof(context));
+            if (variables == null) throw new ArgumentNullException(nameof(variables));
+            if (workingDirectory == null) throw new ArgumentNullException(nameof(workingDirectory));
+            if (assemblyInfoFile == null) throw new ArgumentNullException(nameof(assemblyInfoFile));
+            #endregion
+
             var fileSystem = new VCSVersion.Helpers.FileSystem();
             
             using (context.AddLoggers())
