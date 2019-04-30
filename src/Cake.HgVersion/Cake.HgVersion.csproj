@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0</TargetFrameworks>
     <AssemblyName>Cake.HgVersion</AssemblyName>
     <PackageId>Cake.HgVersion</PackageId>
     <Authors>vCipher</Authors>
