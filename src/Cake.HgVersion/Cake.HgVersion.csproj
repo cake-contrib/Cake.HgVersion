@@ -28,6 +28,6 @@
     <PackageReference Include="Hg.Net" Version="0.1.5" PrivateAssets="true" />
     <PackageReference Include="VCSVersion" Version="0.1.6" PrivateAssets="true" />
     <PackageReference Include="HgVersion" Version="0.1.9" PrivateAssets="true" />
-    <PackageReference Include="YamlDotNet" Version="4.2.3" PrivateAssets="true" />
+    <PackageReference Include="YamlDotNet" Version="5.0.0" PrivateAssets="true" />
   </ItemGroup>
 </Project>
