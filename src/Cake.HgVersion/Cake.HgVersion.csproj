@@ -8,6 +8,8 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Copyright>Copyright © vCipher 2018</Copyright>
     <PackageProjectUrl>https://github.com/cake-contrib/Cake.HgVersion</PackageProjectUrl>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <RepositoryType>git</RepositoryType>
     <RepositoryUrl>https://github.com/cake-contrib/Cake.HgVersion.git</RepositoryUrl>
     <PackageTags>cake mercurial semver</PackageTags>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
