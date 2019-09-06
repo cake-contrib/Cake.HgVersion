@@ -7,8 +7,8 @@
     <Description>Cake AddIn that extends Cake with SemVer versioning using Mercurial history</Description>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <Copyright>Copyright © vCipher 2018</Copyright>
-    <PackageProjectUrl>https://github.com/vCipher/Cake.HgVersion</PackageProjectUrl>
-    <RepositoryUrl>https://github.com/vCipher/Cake.HgVersion</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/cake-contrib/Cake.HgVersion</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/cake-contrib/Cake.HgVersion.git</RepositoryUrl>
     <PackageTags>cake mercurial semver</PackageTags>
     <PackageIconUrl>https://cdn.jsdelivr.net/gh/cake-contrib/graphics/png/cake-contrib-medium.png</PackageIconUrl>
     <NoWarn>1591</NoWarn>

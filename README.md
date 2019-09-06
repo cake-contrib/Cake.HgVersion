@@ -5,4 +5,4 @@ Cake AddIn that extends Cake with SemVer versioning using Mercurial history
 
 | Build server                | Platform     | Status                                                                                                                    |
 |-----------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------|
-| AppVeyor                    | Windows      | [![Build status](https://ci.appveyor.com/api/projects/status/yhivosl87oqpoja2?svg=true)](https://ci.appveyor.com/project/VCipher/cake-hgversion) |
+| AppVeyor                    | Windows      | [![Build status](https://ci.appveyor.com/api/projects/status/yhivosl87oqpoja2?svg=true)](https://ci.appveyor.com/project/cakecontrib/cake-hgversion) |

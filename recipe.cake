@@ -6,14 +6,15 @@ BuildParameters.SetParameters(context: Context,
     buildSystem: BuildSystem,
     sourceDirectoryPath: "./src",
     title: "Cake.HgVersion",
-    repositoryOwner: "vCipher",
+    repositoryOwner: "cake-contrib",
     repositoryName: "Cake.HgVersion",
-    appVeyorAccountName: "vCipher",
+    appVeyorAccountName: "cakecontrib",
     solutionFilePath: "./src/Cake.HgVersion.sln",
     shouldRunCodecov: false,
     shouldRunDotNetCorePack: true,
     shouldRunIntegrationTests: true,
-    wyamSourceFiles: "../../src/**/{!bin,!obj,!packages,!*Tests,}/**/*.cs");
+    wyamSourceFiles: "../../src/**/{!bin,!obj,!packages,!*Tests,}/**/*.cs",
+    shouldRunGitVersion: true);
 
 BuildParameters.PrintParameters(Context);
 ToolSettings.SetToolSettings(context: Context);
