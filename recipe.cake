@@ -27,7 +27,7 @@ Task("Unzip-Addin")
     var nugetRoot = BuildParameters.Paths.Directories.NuGetPackages;
     var package = $"{nugetRoot}/{addin}.{semVersion}.nupkg";
     var addinDir = MakeAbsolute(Directory($"./tools/Addins/{addin}/{addin}"));
-    
+
     if (DirectoryExists(addinDir))
     {
         DeleteDirectory(addinDir, new DeleteDirectorySettings {
