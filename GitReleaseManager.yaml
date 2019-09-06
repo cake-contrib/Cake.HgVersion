@@ -4,6 +4,7 @@ issue-labels-include:
   - Bug
   - Improvement
   - Documentation
+  - Security
 issue-labels-exclude:
   - Build
 issue-labels-alias:
