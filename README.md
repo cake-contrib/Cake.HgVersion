@@ -1,5 +1,6 @@
 # Cake.HgVersion
-Cake AddIn that extends Cake with SemVer versioning using Mercurial history
+
+Cake AddIn that extends Cake with SemVer versioning using Mercurial history.
 
 [![NuGet](https://img.shields.io/nuget/v/Cake.HgVersion.svg)](https://www.nuget.org/packages/Cake.HgVersion)
 
